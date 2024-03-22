@@ -2,7 +2,7 @@
     url = https://github.com/fastai/course22.git
     fetch = +refs/heads/*:refs/remotes/fastai/*
 [remote "origin"]
-    url = git@github.com:huangyingw/fastai_course22.git
+    url = git@github.com:huangyingw/course22.git
     fetch = +refs/heads/*:refs/remotes/origin/*
 [push]
     remote = origin
