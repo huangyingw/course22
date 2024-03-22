@@ -1,0 +1,248 @@
+diff --git a/.gitconfig b/.gitconfig
+new file mode 100644
+--- /dev/null
++++ ./.gitconfig
+@@ -0,0 +1,22 @@
++[remote "fastai"]
++    url = https://github.com/fastai/course22.git
++    fetch = +refs/heads/*:refs/remotes/fastai/*
++[remote "origin"]
++    url = git@github.com:huangyingw/fastai_course22.git
++    fetch = +refs/heads/*:refs/remotes/origin/*
++[push]
++    remote = origin
++[gsync]
++    remote = fastai
++    target = fastai/master
++[branch "dev"]
++    remote = origin
++    merge = refs/heads/dev
++[branch "master"]
++    remote = origin
++    merge = refs/heads/master
++[gdio]
++    ignore = *.gdio.diff
++[deploy]
++	host = localhost
++	path = ~//media/secure_bcache/myproject/git/AI/fastai/course22
+diff --git a/00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb b/00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb
+--- ./00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb
++++ ./00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb
+@@ -9,7 +9,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": null,
++   "execution_count": 1,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -26,7 +26,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": null,
++   "execution_count": 2,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -571,6 +571,18 @@
+    "display_name": "Python 3 (ipykernel)",
+    "language": "python",
+    "name": "python3"
++  },
++  "language_info": {
++   "codemirror_mode": {
++    "name": "ipython",
++    "version": 3
++   },
++   "file_extension": ".py",
++   "mimetype": "text/x-python",
++   "name": "python",
++   "nbconvert_exporter": "python",
++   "pygments_lexer": "ipython3",
++   "version": "3.8.10"
+   }
+  },
+  "nbformat": 4,
+diff --git a/clean/00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb b/clean/00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb
+--- ./clean/00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb
++++ ./clean/00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb
+@@ -2,7 +2,6 @@
+  "cells": [
+   {
+    "cell_type": "markdown",
+-   "idx_": 0,
+    "metadata": {},
+    "source": [
+     "## Is it a bird?"
+@@ -10,8 +9,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": null,
+-   "idx_": 1,
++   "execution_count": 1,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -28,8 +26,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": null,
+-   "idx_": 2,
++   "execution_count": 2,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -45,7 +42,6 @@
+   },
+   {
+    "cell_type": "markdown",
+-   "idx_": 6,
+    "metadata": {},
+    "source": [
+     "## Step 1: Download images of birds and non-birds"
+@@ -53,8 +49,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": null,
+-   "idx_": 7,
++   "execution_count": 3,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -64,10 +59,21 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": null,
+-   "idx_": 8,
++   "execution_count": 4,
+    "metadata": {},
+-   "outputs": [],
++   "outputs": [
++    {
++     "ename": "ImportError",
++     "evalue": "cannot import name 'ddg_images' from 'duckduckgo_search' (/usr/local/lib/python3.8/dist-packages/duckduckgo_search/__init__.py)",
++     "output_type": "error",
++     "traceback": [
++      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
++      "\u001b[0;31mImportError\u001b[0m                               Traceback (most recent call last)",
++      "Cell \u001b[0;32mIn[4], line 1\u001b[0m\n\u001b[0;32m----> 1\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mduckduckgo_search\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m ddg_images\n\u001b[1;32m      2\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mfastcore\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mall\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m \u001b[38;5;241m*\u001b[39m\n\u001b[1;32m      4\u001b[0m \u001b[38;5;28;01mdef\u001b[39;00m \u001b[38;5;21msearch_images\u001b[39m(term, max_images\u001b[38;5;241m=\u001b[39m\u001b[38;5;241m200\u001b[39m): \u001b[38;5;28;01mreturn\u001b[39;00m L(ddg_images(term, max_results\u001b[38;5;241m=\u001b[39mmax_images))\u001b[38;5;241m.\u001b[39mitemgot(\u001b[38;5;124m'\u001b[39m\u001b[38;5;124mimage\u001b[39m\u001b[38;5;124m'\u001b[39m)\n",
++      "\u001b[0;31mImportError\u001b[0m: cannot import name 'ddg_images' from 'duckduckgo_search' (/usr/local/lib/python3.8/dist-packages/duckduckgo_search/__init__.py)"
++     ]
++    }
++   ],
+    "source": [
+     "from duckduckgo_search import ddg_images\n",
+     "from fastcore.all import *\n",
+@@ -78,7 +84,6 @@
+   {
+    "cell_type": "code",
+    "execution_count": null,
+-   "idx_": 10,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -89,7 +94,6 @@
+   {
+    "cell_type": "code",
+    "execution_count": null,
+-   "idx_": 12,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -105,7 +109,6 @@
+   {
+    "cell_type": "code",
+    "execution_count": null,
+-   "idx_": 14,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -116,7 +119,6 @@
+   {
+    "cell_type": "code",
+    "execution_count": null,
+-   "idx_": 16,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -138,7 +140,6 @@
+   },
+   {
+    "cell_type": "markdown",
+-   "idx_": 17,
+    "metadata": {},
+    "source": [
+     "## Step 2: Train our model"
+@@ -147,7 +148,6 @@
+   {
+    "cell_type": "code",
+    "execution_count": null,
+-   "idx_": 19,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -159,7 +159,6 @@
+   {
+    "cell_type": "code",
+    "execution_count": null,
+-   "idx_": 21,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -177,7 +176,6 @@
+   {
+    "cell_type": "code",
+    "execution_count": null,
+-   "idx_": 24,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -187,7 +185,6 @@
+   },
+   {
+    "cell_type": "markdown",
+-   "idx_": 26,
+    "metadata": {},
+    "source": [
+     "## Step 3: Use our model (and build your own!)"
+@@ -196,7 +193,6 @@
+   {
+    "cell_type": "code",
+    "execution_count": null,
+-   "idx_": 28,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -208,12 +204,23 @@
+  ],
+  "metadata": {
+   "kernelspec": {
+-   "display_name": "python3",
++   "display_name": "Python 3 (ipykernel)",
+    "language": "python",
+    "name": "python3"
++  },
++  "language_info": {
++   "codemirror_mode": {
++    "name": "ipython",
++    "version": 3
++   },
++   "file_extension": ".py",
++   "mimetype": "text/x-python",
++   "name": "python",
++   "nbconvert_exporter": "python",
++   "pygments_lexer": "ipython3",
++   "version": "3.8.10"
+   }
+  },
+  "nbformat": 4,
+- "nbformat_minor": 4,
+- "path_": "00-is-it-a-bird-creating-a-model-from-your-own-data.ipynb"
++ "nbformat_minor": 4
+ }
